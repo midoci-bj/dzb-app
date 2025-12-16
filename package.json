@@ -1,0 +1,100 @@
+{
+  "name": "dzb-installer",
+  "version": "1.0.5",
+  "main": "electron/main.js",
+  "productName": "定制宝",
+  "electronVersion": "20.3.9",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:build": "vite build && electron-builder",
+    "electron:build:mac": "vite build && APPLE_ID=1811616365@qq.com APPLE_ID_PASSWORD=gxbm-cxge-ulva-bpih ASC_PROVIDER=5W7FXZ8PAH electron-builder",
+    "electron:start-win": "set VITE_DEV_SERVER_URL=http://localhost:5173 && electron .",
+    "electron:start-mac": "export VITE_DEV_SERVER_URL=http://localhost:5173 && electron ."
+  },
+  "build": {
+    "appId": "com.dzb.client.30429744",
+    "productName": "定制宝",
+    "directories": {
+      "output": "release"
+    },
+    "protocols": [
+      {
+        "name": "定制宝登录回调",
+        "schemes": [
+          "midoci30429744"
+        ],
+        "role": "Editor"
+      }
+    ],
+    "electronVersion": "20.3.9",
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/icon.*",
+      "!**/node_modules/**/*.md",
+      "!**/node_modules/**/test"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "public/icon.icns",
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlementsInherit": "./entitlements.mac.plist",
+      "entitlements": "entitlements.mac.plist",
+      "identity": "Beijing Midoci Culture Co., Ltd. (5W7FXZ8PAH)",
+      "darkModeSupport":true,
+      "type": "distribution"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icon.ico",
+      "signAndEditExecutable": false,
+      "signingHashAlgorithms": [
+        "sha256"
+      ],
+      "verifyUpdateCodeSignature": true,
+      "requestedExecutionLevel": "asInvoker",
+      "publisherName": "米多琪互动h5",
+      "executableName": "定制宝"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "public/icon.ico",
+      "uninstallerIcon": "public/icon.ico",
+      "installerHeaderIcon": "public/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "定制宝",
+      "artifactName": "定制宝 Setup ${version}.${ext}",
+      "uninstallDisplayName": "定制宝",
+      "include": "installer.nsh",
+      "perMachine": false
+    },
+    "publish": null,
+    "compression": "maximum"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "electron": "^20.3.9",
+    "electron-builder": "^23.6.0",
+    "vite": "^4.4.5"
+  }
+}
